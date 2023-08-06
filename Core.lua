@@ -94,22 +94,21 @@ local function CreateOrUpdateMacro()
 	local conjureOnRightClick = (fubaMageFoodMacroDB and fubaMageFoodMacroDB.options and fubaMageFoodMacroDB.options.conjureOnRightClick) or DefaultSettings.options.conjureOnRightClick
 	local MacroIndex = GetMacroIndexByName(macroName);
 
-	local mageline1 = "";
-	local mageline2 = "";
-	local mageline3 = "";
+	local macroln1 = "";
+	local macroln2 = "";
 	local itemUseString = "item:"..BestMageFoodInBag
 
-	mageline1 = "#showtooltip "..itemUseString.."\n";
+	macroln1 = "#showtooltip "..itemUseString.."\n";
 	if conjureOnRightClick then
-		mageline2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
+		macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
 	else
-		mageline2 = "/use "..itemUseString.."\n";
+		macroln2 = "/use "..itemUseString.."\n";
 	end
 
 	if (MacroIndex == 0) then
-		local macroId = CreateMacro(macroName, "INV_MISC_QUESTIONMARK", mageline1..mageline2..mageline3, nil)
+		local macroId = CreateMacro(macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2, nil)
 	else
-		local macroId = EditMacro(MacroIndex, macroName, "INV_MISC_QUESTIONMARK", mageline1..mageline2..mageline3)
+		local macroId = EditMacro(MacroIndex, macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2)
 	end
 end
 
