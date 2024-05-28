@@ -1,5 +1,6 @@
-## Interface: 100206
+## Interface: 100207
 ## Interface-Wrath: 30403
+## Interface-Cata: 40400
 ## Author: fuba
 ## Version: @project-version@
 ## Title: fuba's |cff0080ffMage Food Macro|r
