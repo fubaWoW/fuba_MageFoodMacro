@@ -70,7 +70,8 @@ local MageFoodIDs = {
 	65499,	--Conjured Mana Cake
 	43523,	--Conjured Mana Strudel
 	43518,	--Conjured Mana Pie
-	34062		--Conjured Mana Biscuit
+	34062,	--Conjured Mana Biscuit
+	--5349		--Conjured Muffin
 }
 
 local function CreateOrUpdateMacro()
@@ -80,35 +81,46 @@ local function CreateOrUpdateMacro()
 	end
 
 	BestMageFoodInBag = BestMageFoodInBag or 0
-	--if GetItemCount(BestMageFoodInBag) > 0 then return end
-
-	for _,v in ipairs(MageFoodIDs) do
-		if GetItemCount(v) > 0 then
-			BestMageFoodInBag = v
-			break
-		end
-	end
-	if BestMageFoodInBag == 0 then return end
-
+	
 	local macroName = (fubaMageFoodMacroDB and fubaMageFoodMacroDB.options and fubaMageFoodMacroDB.options.macroName) or DefaultSettings.options.macroName
 	local conjureOnRightClick = (fubaMageFoodMacroDB and fubaMageFoodMacroDB.options and fubaMageFoodMacroDB.options.conjureOnRightClick) or DefaultSettings.options.conjureOnRightClick
 	local MacroIndex = GetMacroIndexByName(macroName);
+	local macroId = 0;
+	
+	if (MacroIndex == 0) then  -- Use "Conjured Mana Biscuit" by default if there is not Mage Item in inventoery
+		local macroln1 = "";
+		local macroln2 = "";
+		local itemUseString = "item:34062" -- use Item by ID (Conjured Mana Biscuit)
+		
+		macroln1 = "#showtooltip "..itemUseString.."\n";
+		if conjureOnRightClick then
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
+		else
+			macroln2 = "/use "..itemUseString.."\n";
+		end
+	
+		macroId = CreateMacro(macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2, nil)
+	else		
+		for _,v in ipairs(MageFoodIDs) do
+			if GetItemCount(v) > 0 then
+				BestMageFoodInBag = v
+				break
+			end
+		end
+		if BestMageFoodInBag == 0 then return end
+		
+		local macroln1 = "";
+		local macroln2 = "";
+		local itemUseString = "item:"..BestMageFoodInBag
 
-	local macroln1 = "";
-	local macroln2 = "";
-	local itemUseString = "item:"..BestMageFoodInBag
+		macroln1 = "#showtooltip "..itemUseString.."\n";
+		if conjureOnRightClick then
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
+		else
+			macroln2 = "/use "..itemUseString.."\n";
+		end
 
-	macroln1 = "#showtooltip "..itemUseString.."\n";
-	if conjureOnRightClick then
-		macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
-	else
-		macroln2 = "/use "..itemUseString.."\n";
-	end
-
-	if (MacroIndex == 0) then
-		local macroId = CreateMacro(macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2, nil)
-	else
-		local macroId = EditMacro(MacroIndex, macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2)
+			macroId = EditMacro(MacroIndex, macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2)
 	end
 end
 
