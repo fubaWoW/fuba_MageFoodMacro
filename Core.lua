@@ -1,5 +1,8 @@
 local addon, ns = ...
 
+local IsAddOnLoaded = C_AddOns and C_AddOns.IsAddOnLoaded or IsAddOnLoaded
+local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
+
 local DefaultSettings = {
   options = {
 		conjureOnRightClick = true,
