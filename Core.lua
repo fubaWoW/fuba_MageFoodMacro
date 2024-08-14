@@ -1,7 +1,6 @@
 local addon, ns = ...
 
-local IsAddOnLoaded = C_AddOns and C_AddOns.IsAddOnLoaded or IsAddOnLoaded
-local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo or GetSpellInfo
+
 
 local DefaultSettings = {
   options = {
@@ -45,12 +44,13 @@ MageFood:RegisterEvent("PLAYER_REGEN_ENABLED")
 
 local InCombatLockdown = _G.InCombatLockdown
 local UnitAffectingCombat = _G.UnitAffectingCombat
-local GetSpellInfo = _G.GetSpellInfo
 local GetSpellLink = _G.GetSpellLink
 local GetItemCount = _G.GetItemCount
 local GetMacroIndexByName = _G.GetMacroIndexByName
 local CreateMacro = _G.CreateMacro
 local EditMacro = _G.EditMacro
+local IsAddOnLoaded = _G.C_AddOns and _G.C_AddOns.IsAddOnLoaded or _G.IsAddOnLoaded
+local GetSpellInfo = _G.C_Spell and _G.C_Spell.GetSpellInfo or _G.GetSpellInfo
 
 local spellNameConjureRefreshment = GetSpellInfo(190336) or GetSpellInfo(42955) or "Conjure Refreshment"; -- get Localized Spell Name or just use Conjure Refreshment if nothing found
 local TaintableDelayedEvent = false;
