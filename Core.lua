@@ -1,7 +1,5 @@
 local addon, ns = ...
 
-
-
 local DefaultSettings = {
   options = {
 		conjureOnRightClick = true,
@@ -34,7 +32,7 @@ if fubaMageFoodMacroDB.version and fubaMageFoodMacroDB.version < DefaultSettings
   fubaPrintDebug("Database: Old version found")
 end
 
--- actual Code, do not modify except you know what you are doing ;)
+-- actual Code, do not modify except you know what you are doing )
 local MageFood = CreateFrame("FRAME", "MageFood", UIParent)
 MageFood:RegisterEvent("PLAYER_ENTERING_WORLD")
 MageFood:RegisterEvent("BAG_UPDATE")
@@ -49,14 +47,13 @@ local GetItemCount = _G.GetItemCount
 local GetMacroIndexByName = _G.GetMacroIndexByName
 local CreateMacro = _G.CreateMacro
 local EditMacro = _G.EditMacro
-local IsAddOnLoaded = _G.C_AddOns and _G.C_AddOns.IsAddOnLoaded or _G.IsAddOnLoaded
-local GetSpellInfo = _G.C_Spell and _G.C_Spell.GetSpellInfo or _G.GetSpellInfo
 
-local spellNameConjureRefreshment = GetSpellInfo(190336) or GetSpellInfo(42955) or "Conjure Refreshment"; -- get Localized Spell Name or just use Conjure Refreshment if nothing found
-local TaintableDelayedEvent = false;
-local MageIsInWorld = false;
-local forceUpdate = false;
-local BestMageFoodInBag = 0;
+local GetSpellName = C_Spell and C_Spell.GetSpellName or GetSpellInfo -- backward compatibility if needed?
+local spellNameConjureRefreshment = GetSpellName(190336) or GetSpellName(42955) or "Conjure Refreshment" -- get Localized Spell Name or just use Conjure Refreshment if nothing found
+local TaintableDelayedEvent = false
+local MageIsInWorld = false
+local forceUpdate = false
+local BestMageFoodInBag = 0
 
 local function IsTaintable()
   return (InCombatLockdown() or (UnitAffectingCombat("player") or UnitAffectingCombat("pet")))
@@ -87,19 +84,19 @@ local function CreateOrUpdateMacro()
 	
 	local macroName = (fubaMageFoodMacroDB and fubaMageFoodMacroDB.options and fubaMageFoodMacroDB.options.macroName) or DefaultSettings.options.macroName
 	local conjureOnRightClick = (fubaMageFoodMacroDB and fubaMageFoodMacroDB.options and fubaMageFoodMacroDB.options.conjureOnRightClick) or DefaultSettings.options.conjureOnRightClick
-	local MacroIndex = GetMacroIndexByName(macroName);
-	local macroId = 0;
+	local MacroIndex = GetMacroIndexByName(macroName)
+	local macroId = 0
 	
 	if (MacroIndex == 0) then  -- Use "Conjured Mana Biscuit" by default if there is not Mage Item in inventoery
-		local macroln1 = "";
-		local macroln2 = "";
+		local macroln1 = ""
+		local macroln2 = ""
 		local itemUseString = "item:34062" -- use Item by ID (Conjured Mana Biscuit)
 		
-		macroln1 = "#showtooltip "..itemUseString.."\n";
+		macroln1 = "#showtooltip "..itemUseString.."\n"
 		if conjureOnRightClick then
-			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..""..itemUseString.."\n"
 		else
-			macroln2 = "/use "..itemUseString.."\n";
+			macroln2 = "/use "..itemUseString.."\n"
 		end
 	
 		macroId = CreateMacro(macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2, nil)
@@ -112,15 +109,15 @@ local function CreateOrUpdateMacro()
 		end
 		if BestMageFoodInBag == 0 then return end
 		
-		local macroln1 = "";
-		local macroln2 = "";
+		local macroln1 = ""
+		local macroln2 = ""
 		local itemUseString = "item:"..BestMageFoodInBag
 
-		macroln1 = "#showtooltip "..itemUseString.."\n";
+		macroln1 = "#showtooltip "..itemUseString.."\n"
 		if conjureOnRightClick then
-			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n";
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..""..itemUseString.."\n"
 		else
-			macroln2 = "/use "..itemUseString.."\n";
+			macroln2 = "/use "..itemUseString.."\n"
 		end
 
 			macroId = EditMacro(MacroIndex, macroName, "INV_MISC_QUESTIONMARK", macroln1..macroln2)
