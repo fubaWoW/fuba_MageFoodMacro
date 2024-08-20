@@ -94,7 +94,7 @@ local function CreateOrUpdateMacro()
 		
 		macroln1 = "#showtooltip "..itemUseString.."\n"
 		if conjureOnRightClick then
-			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..""..itemUseString.."\n"
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n"
 		else
 			macroln2 = "/use "..itemUseString.."\n"
 		end
@@ -115,7 +115,7 @@ local function CreateOrUpdateMacro()
 
 		macroln1 = "#showtooltip "..itemUseString.."\n"
 		if conjureOnRightClick then
-			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..""..itemUseString.."\n"
+			macroln2 = "/use [btn:2]"..spellNameConjureRefreshment..";"..itemUseString.."\n"
 		else
 			macroln2 = "/use "..itemUseString.."\n"
 		end
