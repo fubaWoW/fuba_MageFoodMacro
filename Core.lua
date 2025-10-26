@@ -71,6 +71,7 @@ local MageFoodIDs = {
 	43523,	--Conjured Mana Strudel
 	43518,	--Conjured Mana Pie
 	34062,	--Conjured Mana Biscuit
+	20516,	--Bobbing Apple (Hallows End Event)
 	--5349		--Conjured Muffin
 }
 
