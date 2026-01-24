@@ -1,13 +1,14 @@
-## Interface: 110207
-## Interface-Wrath: 30404
-## Interface-Cata: 40402
+## Interface: 120001, 120000, 110207, 50503, 40402, 30405
 ## Author: fuba
 ## Version: @project-version@
 ## Title: fuba's |cff0080ffMage Food Macro|r
 ## Notes: Creates and Edits a Macro what always use the highest Conjured Mage Food in your Inventory.
 ## IconTexture: Interface\AddOns\fuba_MageFoodMacro\fubaLogo
 ## SavedVariables: fubaMageFoodMacroDB
-## X-Category: fuba
+
+## X-Category: |cffff8000fuba
+## Category-enUS: |cffff8000fuba
+## Category-deDE: |cffff8000fuba
 
 ## X-Curse-Project-ID: 899266
 
