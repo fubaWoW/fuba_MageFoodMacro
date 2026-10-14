@@ -43,7 +43,7 @@ MageFood:RegisterEvent("PLAYER_REGEN_ENABLED")
 local InCombatLockdown = _G.InCombatLockdown
 local UnitAffectingCombat = _G.UnitAffectingCombat
 local GetSpellLink = _G.GetSpellLink
-local GetItemCount = _G.GetItemCount
+local GetItemCount = C_Item and C_Item.GetItemCount or _G.GetItemCount
 local GetMacroIndexByName = _G.GetMacroIndexByName
 local CreateMacro = _G.CreateMacro
 local EditMacro = _G.EditMacro
